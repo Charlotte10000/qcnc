@@ -1,0 +1,176 @@
+\section{Introduction}
+\label{sec:introduction}
+
+Distributing reliable entanglement across noisy quantum networks
+is essential for secure communication, distributed quantum
+computing, and networked quantum sensing
+\cite{Wehner2018QuantumInternet}.
+Shared entanglement enables quantum information processing
+between distant nodes, but its usefulness is limited by noise
+introduced during distribution.
+Entanglement distillation and quantum network tomography (QNT)
+address two complementary aspects of this problem.
+
+Entanglement distillation uses local operations and classical
+communication (LOCC) to probabilistically
+ convert multiple noisy entangled pairs
+into fewer pairs of higher fidelity   
+\cite{PhysRevLett.76.722,Deutsch_1996}.
+It provides a means to recover useful entanglement from imperfect
+physical links and is an important component of quantum repeater
+architectures \cite{Briegel1998Repeaters}.
+For distributed quantum computing, improving shared entanglement
+supports more reliable teleportation and quantum operations
+between remote processors \cite{Wehner2018QuantumInternet}.
+
+QNT infers the noise parameters of internal quantum links from
+measurements performed at accessible peripheral nodes, termed
+\emph{monitors} \cite{Andrade2024QNT}.
+For experimental quantum networks, these estimates help diagnose
+noisy links and guide distillation protocols.
+For distributed quantum computing, they provide information for
+predicting communication errors and selecting entanglement
+distribution paths. The fidelity of an end-to-end state alone does not identify
+which internal links introduce the noise; QNT seeks to recover
+this link-level information from endpoint observations.
+Together, entanglement distillation and QNT support
+both the characterization and improvement of distributed quantum resources. Integrating them is particularly attractive when
+generating entanglement is costly and measurement access is
+restricted to peripheral nodes.
+
+Despite their different objectives, entanglement distillation
+and the QNT protocols considered here share a common operational feature: both rely on local measurements at accessible
+nodes and classical processing of the outcomes. In distillation,
+these outcomes determine whether an output pair is retained; in
+QNT, their statistics are used to infer internal link parameters.
+This operational similarity raises the possibility of using
+distillation measurement statistics for network tomography
+
+
+
+
+
+
+
+
+
+Casapao et al.\ pioneered the integration of entanglement
+distillation and quantum state estimation with
+Disti-Mator which
+uses measurement statistics collected during entanglement
+distillation to estimate the $X$-, $Y$-, and $Z$-basis parameters
+that fully characterize a Bell-diagonal state under a fidelity
+condition \cite{Casapao2025DistiMator}.
+Their subsequent work developed a double-selection-based
+estimator in \S~\ref{subsec:doub} using the marginal and joint coincidence statistics
+collected during distillation \cite{Casapao_2025};
+Motivated by these results, we identify a natural starting
+point for QNT: the states shared by peripheral monitors
+encode information about the individual links that we
+use to distribute them.
+We can therefore not only distill these states but also
+estimate their parameters, and then use these estimates
+to infer individual link parameters.
+We thus integrate QNT into end-to-end distillation by using
+distillation measurement statistics for link characterization
+while also generating higher-fidelity entangled pairs,
+thereby obtaining the best of both worlds.
+We develop a Joint-Coincidence Estimator (JCE) and a
+Marginal-Coincidence Estimator (MCE) for this task.
+
+
+
+
+Realizing this idea requires overcoming two challenges. First,
+state estimation does not automatically imply link identifiability.
+In a three-link star network with Pauli channels, direct Unicast
+transmission yields pairwise products of link-level Pauli transfer
+matrix (PTM) eigenvalues. From these products, one can estimate the absolute value of the link parameters but with a sign ambiguity. To resolve this ambiguity, we adapt the Mergecast
+and channel-dressing techniques introduced
+in \cite{wang2025quantumnetworktomographygeneral} to prepare
+Bell-diagonal states for double-selection measurements.
+Mergecast provides estimates of three-link correlations,
+while Clifford dressing makes the required Pauli components
+accessible. Combining these estimates with those of the pairwise
+products enables estimation of both the magnitudes and
+signs of the link parameters without access to measurement
+outcomes from the central node.
+
+Second, inherited from the double-selection protocol, estimating all three state parameters \(q_X, q_Y, q_Z\) requires a source-state fidelity condition, implying another sign ambiguity of the protocol itself.
+ This condition restricts
+the noise regimes in which JCE applies. We overcome this
+restriction in MCE  by observing that
+the $Z$-basis parameter can be uniquely recovered without
+a fidelity condition. Applying uniform Clifford dressings
+maps the original $X$ and $Y$ components to the effective
+$Z$ component. Repeating the estimation in these configurations
+therefore enables the estimation of all link parameters
+without the source-state fidelity requirement.
+
+Our contributions are summarized as follows:
+\begin{itemize}
+    \item In \S~\ref{sec:dist-qnt}, we develop a distillation-assisted QNT framework for a
+    three-link star network with unknown Pauli channels. The framework
+    integrates Unicast and adapted Mergecast preparations with
+    double-selection measurements at peripheral monitors, using
+    measurement statistics from both accepted and rejected attempts for estimation.
+    The central node performs prescribed operations without supplying
+    measurement outcomes to the tomography procedure.
+
+\item In \S~\ref{linkpa}, we construct two estimators to identify
+the parameters of each Pauli channel in the three-link star network.
+JCE combines estimates of pairwise and three-link correlations
+with link-dependent Clifford dressing under the specified
+source-state fidelity condition $F>1/2$.
+MCE combines $Z$-basis coincidence statistics with uniform
+Clifford dressing and requires no source-state fidelity condition.
+\textcolor{blue}{
+\item In \S~\ref{sec:numerical-experiments}, we evaluate JCE and MCE through
+Qiskit simulations and compare their estimation accuracy
+with existing QNT methods under different measurement
+budgets and prior assumptions. The results demonstrate
+the benefit of joint coincidence statistics for estimation
+and show that both estimators can recover channel parameters
+while retaining entangled pairs with improved fidelity.
+We further extend JCE to a six-link triangular network,
+demonstrating its applicability beyond the three-link
+star topology.
+```}
+
+\end{itemize}
+
+% \subsection{Related Work}
+% Entanglement distillation has developed from foundational two-party
+% protocols into a key tool for long-distance quantum communication.
+% In 1996, Bennett et al.\ established a distillation protocol for
+% extracting high-quality entangled pairs from noisy shared states
+% \cite{PhysRevLett.76.722}, while Deutsch et al.\ introduced a
+% purification-based quantum privacy amplification protocol
+% \cite{Deutsch_1996}. Briegel et al.\ subsequently incorporated nested
+% purification into quantum repeaters, connecting local entanglement
+% processing with entanglement distribution over long distances
+% \cite{Briegel1998Repeaters}. Further developments addressed the
+% effects of imperfect local operations. In particular, Fujii and
+% Yamamoto introduced double selection, which uses two ancillary pairs
+% to improve error detection and achieve higher purification fidelities
+% and noise thresholds than single selection in the regimes they
+% studied \cite{PhysRevA.80.042308}.
+
+% The development of QNT has focused on recovering internal link
+% properties despite limited measurement access. In 2022, de Andrade
+% et al.\ formulated end-to-end channel characterization through
+% multipartite state distribution and studied star networks with
+% single-Pauli noise, including bit-flip channels
+% \cite{Andrade2022MultipartiteQNT}. Subsequent work developed
+% protocols for uniquely characterizing quantum flip stars and used
+% quantum Fisher information to compare their estimation performance
+% \cite{Andrade2023FlipStars}. The framework was also applied to
+% depolarizing channels, extending its scope beyond bit-flip noise
+% \cite{Andrade2024QNT}. More recently, Wang et al.\ introduced
+% Mergecast and a progressive etching procedure to address
+% identifiability in networks with general Pauli channels and broader
+% topologies, and further considered state-preparation and measurement
+% (SPAM) errors \cite{wang2025quantumnetworktomographygeneral}.
+% These studies establish methods for extracting link information
+% from network-level observations, motivating the use of other
+% network operations as sources of tomographic data.

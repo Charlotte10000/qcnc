@@ -1,0 +1,305 @@
+\xw{defer to some place later or appendix or discussion.}
+For each Pauli component, knowing the sign of one link parameter
+would resolve the ambiguity, since the other two signs follow from
+the measured products. In particular, a known reference link
+\(i_0\) satisfying \(A_{i_0}>1/2\) would imply
+\(q_{X,\ell _0},q_{Y,\ell _0},q_{Z,\ell _0}>0\), allowing all three channels
+to be identified from the three sets of pairwise products.
+In this work, we do not assume such prior knowledge. 
+
+\section{Proof of Lemma~\ref{lem:double-selection-statistics}}
+\label{app:double-selection}
+
+We label the Bell states by two bits \(a,b\in\{0,1\}\):
+\begin{equation}
+\ket{\beta_{ab}}
+:=
+(I\otimes X^aZ^b)\ket{\Phi^+}.
+\end{equation}
+The labels \((0,0),(1,0),(1,1),(0,1)\) correspond to
+\(\ket{\Phi^+},\ket{\Psi^+},\ket{\Psi^-},\ket{\Phi^-}\),
+respectively.
+
+Let \((a_i,b_i)\) denote the Bell label of the \(i\)th input pair.
+After the bilateral CNOTs from pair \(1\) to pair \(2\) and from
+pair \(3\) to pair \(2\), the output labels are
+\begin{equation}
+\begin{aligned}
+(a_1',b_1')
+&=(a_1,\;b_1\oplus b_2),\\
+(a_2',b_2')
+&=(a_1\oplus a_2\oplus a_3,\;b_2),\\
+(a_3',b_3')
+&=(a_3,\;b_2\oplus b_3).
+\end{aligned}
+\label{eq:double-selection-bell-labels}
+\end{equation}
+Thus, coincidence in the \(Z\) measurements occurs if and only if
+\(a_1\oplus a_2\oplus a_3=0\), while coincidence in the \(X\)
+measurements occurs if and only if \(b_2\oplus b_3=0\).
+
+Define
+\begin{equation}
+\begin{aligned}
+x&:=\mathbb E[(-1)^b]=2(q_1+q_2)-1,\\
+y&:=\mathbb E[(-1)^{a+b}]=2(q_1+q_3)-1,\\
+z&:=\mathbb E[(-1)^a]=2(q_1+q_4)-1.
+\end{aligned}
+\label{eq:double-selection-correlations}
+\end{equation}
+Let
+\[
+U:=(-1)^{a_1+a_2+a_3},
+\qquad
+V:=(-1)^{b_2+b_3}.
+\]
+By independence of the three input pairs,
+\begin{equation}
+\mathbb E[U]=z^3,
+\qquad
+\mathbb E[V]=x^2,
+\qquad
+\mathbb E[UV]=zy^2.
+\end{equation}
+The coincidence probabilities therefore satisfy
+\begin{equation}
+\begin{aligned}
+p_Z
+&:=
+\Pr(z_A=z_B)
+=
+\mathbb E\left[\frac{1+U}{2}\right]
+=
+\frac{1+z^3}{2},\\
+p_X
+&:=
+\Pr(x_A=x_B)
+=
+\mathbb E\left[\frac{1+V}{2}\right]
+=
+\frac{1+x^2}{2},\\
+p_{XZ}
+&:=
+\Pr(z_A=z_B,\;x_A=x_B)\\
+&=
+\mathbb E\left[\frac{(1+U)(1+V)}{4}\right]
+=
+\frac{1+z^3+x^2+zy^2}{4}.
+\end{aligned}
+\label{eq:double-selection-probabilities}
+\end{equation}
+
+Since \(q_1>1/2\), all three quantities \(x,y,z\) are strictly
+positive. Hence, these relations can be uniquely inverted:
+\begin{equation}
+\begin{aligned}
+x&=\sqrt{2p_X-1},\\
+z&=\sqrt[3]{2p_Z-1},\\
+y&=
+\sqrt{
+\frac{4p_{XZ}-2p_X-2p_Z+1}{z}
+}.
+\end{aligned}
+\label{eq:double-selection-inversion}
+\end{equation}
+The positive square-root branches are fixed by the assumption
+\(q_1>1/2\), which also ensures \(z>0\).
+The Bell-state probabilities are then recovered as
+\begin{equation}
+\begin{bmatrix}
+q_1\\q_2\\q_3\\q_4
+\end{bmatrix}
+=
+\frac{1}{4}
+\begin{bmatrix}
+1+x+y+z\\
+1+x-y-z\\
+1-x+y-z\\
+1-x-y+z
+\end{bmatrix}.
+\label{eq:double-selection-state-reconstruction}
+\end{equation}
+This proves that the three coincidence probabilities uniquely
+determine the input Bell-diagonal state.
+
+It remains to determine the conditional output fidelity.
+By Eq.~\eqref{eq:double-selection-bell-labels}, the first output
+pair is in \(\ket{\Phi^+}\) when
+\[
+a_1=0,
+\qquad
+b_1=b_2.
+\]
+Combining these conditions with the acceptance conditions gives
+\[
+a_2=a_3,
+\qquad
+b_1=b_2=b_3.
+\]
+Therefore, the unnormalized weight of \(\ket{\Phi^+}\) in the
+accepted output is
+\begin{equation}
+\begin{aligned}
+N_{\Phi^+}
+&=
+q_1(q_1^2+q_2^2)+q_4(q_4^2+q_3^2)\\
+&=
+q_1^3+q_4^3+q_1q_2^2+q_4q_3^2.
+\end{aligned}
+\end{equation}
+Since \(p_{XZ}\geq q_1^3>0\), normalization yields
+\begin{equation}
+\begin{aligned}
+F_{\mathrm{out}}
+&=
+\frac{N_{\Phi^+}}{p_{XZ}}\\
+&=
+\frac{
+4\left(q_1^3+q_4^3+q_1q_2^2+q_4q_3^2\right)
+}{
+1+z^3+x^2+zy^2
+},
+\end{aligned}
+\end{equation}
+which establishes
+Eq.~\eqref{eq:double-selection-output-fidelity}.
+\section{Details for Modified \mergecast in Figure \ref{fig:modified-mergecast}}
+Below, we present the quantum states at slices \(1\)--\(4\) of
+Fig.~\ref{fig:modified-mergecast}. Let \(R\) denote the qubit retained
+by \(A_1\), \(T\) the transmitted half of the Bell pair, and \(A\) the
+auxiliary qubit sent by \(A_2\). We use the tensor-product ordering
+\((R,T,A)\). Since the corresponding three-qubit Pauli--Liouville
+vectors contain \(64\) entries, we list only the potentially nonzero
+components with respect to the ordered sparse basis
+\begin{equation}
+\mathcal B_3:=
+\left(
+III,IIZ,XXI,XXZ,YYI,YYZ,ZZI,ZZZ
+\right),
+\end{equation}
+where, for example, \(XXZ:=X_R\otimes X_T\otimes Z_A\).
+
+At slice \(1\), the joint state is
+\begin{equation}
+\rho_{RTA}^{(1)}
+=
+\ket{\Phi^+}\!\bra{\Phi^+}_{RT}
+\otimes
+\ket{0}\!\bra{0}_A,
+\end{equation}
+whose nonzero Pauli--Liouville components are
+\begin{equation}
+\left.\left|\rho_{RTA}^{(1)}\right\rangle\right\rangle_{\mathcal B_3}
+=
+\begin{bmatrix}
+1\\
+1\\
+1\\
+1\\
+-1\\
+-1\\
+1\\
+1
+\end{bmatrix}.
+\end{equation}
+
+After \(T\) and \(A\) pass through \(\mathcal P_1\) and
+\(\mathcal P_2\), respectively, the state at slice \(2\) is
+\begin{equation}
+\rho_{RTA}^{(2)}
+=
+\left(
+\mathcal I_R\otimes\mathcal P_1\otimes\mathcal P_2
+\right)
+\left(\rho_{RTA}^{(1)}\right),
+\end{equation}
+with
+\begin{equation}
+\left.\left|\rho_{RTA}^{(2)}\right\rangle\right\rangle_{\mathcal B_3}
+=
+\begin{bmatrix}
+1\\
+q_{Z2}\\
+q_{X1}\\
+q_{X1}q_{Z2}\\
+-q_{Y1}\\
+-q_{Y1}q_{Z2}\\
+q_{Z1}\\
+q_{Z1}q_{Z2}
+\end{bmatrix}.
+\end{equation}
+
+Node \(C\) then applies
+\(U_{\mathrm C}:=\operatorname{CNOT}_{A\rightarrow T}\).
+Immediately after the CNOT, the state is
+\begin{equation}
+\widetilde{\rho}_{RTA}^{(3)}
+=
+U_{\mathrm C}\rho_{RTA}^{(2)}U_{\mathrm C}^{\dagger},
+\end{equation}
+and its nonzero components are
+\begin{equation}
+\left.\left|\widetilde{\rho}_{RTA}^{(3)}
+\right\rangle\right\rangle_{\mathcal B_3}
+=
+\begin{bmatrix}
+1\\
+q_{Z2}\\
+q_{X1}\\
+q_{X1}q_{Z2}\\
+-q_{Y1}q_{Z2}\\
+-q_{Y1}\\
+q_{Z1}q_{Z2}\\
+q_{Z1}
+\end{bmatrix}.
+\end{equation}
+Here, the CNOT exchanges the Pauli components
+\[
+YYI\longleftrightarrow YYZ,
+\qquad
+ZZI\longleftrightarrow ZZZ,
+\]
+while leaving the other components in \(\mathcal B_3\) unchanged.
+
+Tracing out the auxiliary qubit removes all Pauli strings whose
+auxiliary component is \(Z\). Therefore, at slice \(3\),
+\begin{equation}
+\rho_{RT}^{(3)}
+:=
+\operatorname{Tr}_A
+\left(\widetilde{\rho}_{RTA}^{(3)}\right)
+\end{equation}
+has the restricted Pauli--Liouville representation
+\begin{equation}
+\left.\left|\rho_{RT}^{(3)}\right\rangle\right\rangle
+=
+\begin{bmatrix}
+1\\
+q_{X1}\\
+-q_{Y1}q_{Z2}\\
+q_{Z1}q_{Z2}
+\end{bmatrix},
+\end{equation}
+with respect to the ordered basis
+\((II,XX,YY,ZZ)\).
+
+Finally, after \(T\) passes through \(\mathcal P_3\), the state shared
+between \(A_1\) and \(A_3\) at slice \(4\) is
+\begin{equation}
+\rho_{13}^{(0)}
+=
+\left(\mathcal I_R\otimes\mathcal P_3\right)
+\left(\rho_{RT}^{(3)}\right),
+\end{equation}
+and hence
+\begin{equation}
+\left.\left|\rho_{13}^{(0)}\right\rangle\right\rangle
+=
+\begin{bmatrix}
+1\\
+q_{X1}q_{X3}\\
+-q_{Y1}q_{Z2}q_{Y3}\\
+q_{Z1}q_{Z2}q_{Z3}
+\end{bmatrix}.
+\label{eq:mergecast-slice-state}
+\end{equation}

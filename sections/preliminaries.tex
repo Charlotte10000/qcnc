@@ -1,0 +1,449 @@
+\section{Preliminaries}
+
+\subsection{Pauli--Liouville Representation}
+
+To facilitate the analysis of distillation, we present the Pauli--Liouville representation \cite{Lin2021} in the two-qubit scenario below.
+Let
+\(
+\mathbb{P}_2 \coloneqq\{I,X,Y,Z\}^{ \otimes 2}
+\)
+denote the two-qubit Pauli operator basis, which is a
+complete orthogonal basis for the operator space
+$\mathcal{L}\bigl((\mathbb{C}^{2})^{\otimes 2}\bigr)$ under the
+Hilbert--Schmidt inner product. Then, every two-qubit operator $\mathcal{G}$ can be uniquely expressed as a linear combination of the elements of $\mathbb P_2$.
+% admits a unique Pauli
+% expansion as a linear combination of the Pauli basis elements.
+Define the Pauli coefficient associated with
+$P\in\mathbb{P}_2$ as
+\begin{equation}
+        s_P(\mathcal G)\coloneqq\operatorname{Tr}\!\left(P^{\dagger}\mathcal{G}\right),
+\end{equation}
+we can express $\mathcal{G}$ as follows,
+\begin{equation}
+    \mathcal{G}=\frac{1}{4}\sum_{P\in\mathbb{P}_2}s_P(\mathcal{G})P.
+    \label{eq:pauli-expansion}
+\end{equation}
+
+Following the Pauli-Liouville representation,
+we introduce the \(\left|\cdot\right\rangle\!\rangle\)  notation, and with it, the state can be expressed as a column vector as follows:
+\begin{equation}
+    \begin{aligned}
+        \left|\rho\right\rangle\!\rangle
+        \coloneqq\bigl[s_P(\rho)\bigr]^T_{P\in\mathbb{P}_2}.
+    \end{aligned}
+    \label{eq:pauli-liouville-vectors}
+\end{equation}
+
+For a two-qubit linear map \(\mathcal E\), its Pauli transfer matrix (PTM) \(R_{\mathcal E}\) is a \(16\times16\) matrix, whose enties are
+\begin{equation}
+    \left(R_{\mathcal E}\right)_{P,Q}
+    \coloneqq\frac{1}{4}\Tr\!\left[P^\dagger\mathcal E(Q)\right],
+    \text{ for any } P,Q\in\mathbb{P}_2.
+    \label{eq:ptm-definition}
+\end{equation}
+Consequently, the outcome state of applying the operator \(\mathcal E\) to an input state \(\rho\) can be expressed as follows,
+\begin{equation}
+    \begin{aligned}
+        \left|\mathcal E(\rho)\right\rangle\!\rangle
+         & =R_{\mathcal E}\left|\rho\right\rangle\!\rangle.
+    \end{aligned}
+    \label{eq:pauli-liouville-born-rule}
+\end{equation}
+
+
+\subsection{Pauli Channels in Bell-Diagonal Basis}
+
+% Bell states are particularly convenient for describing two-qubit
+% entanglement under Pauli noise because single-qubit Pauli errors
+% permute the Bell states. 
+Bell basis (composed by Bell states) is particularly convenient for describing two-qubit
+entanglement under Pauli noise because applying a single-qubit Pauli error to one half of a Bell pair maps it to another Bell state.
+The four Bell states are
+\begin{equation}
+    \ket{\Phi^\pm}
+    =
+    \frac{\ket{00}\pm\ket{11}}{\sqrt{2}},
+    \qquad
+    \ket{\Psi^\pm}
+    =
+    \frac{\ket{01}\pm\ket{10}}{\sqrt{2}}.
+\end{equation}
+
+Their density operators admit the Pauli decomposition
+\begin{equation}
+    \begin{aligned}
+        \ket{\Phi^+}\!\bra{\Phi^+}
+         & =
+        \frac{1}{4}
+        \left(
+        I I
+        +X X
+        -Y Y
+        +Z Z
+        \right), \\
+        \ket{\Psi^+}\!\bra{\Psi^+}
+         & =
+        \frac{1}{4}
+        \left(
+        I I
+        +X X
+        +Y Y
+        -Z Z
+        \right), \\
+        \ket{\Psi^-}\!\bra{\Psi^-}
+         & =
+        \frac{1}{4}
+        \left(
+        I I
+        -X X
+        -Y Y
+        -Z Z
+        \right), \\
+        \ket{\Phi^-}\!\bra{\Phi^-}
+         & =
+        \frac{1}{4}
+        \left(
+        I I
+        -X X
+        +Y Y
+        +Z Z
+        \right).
+    \end{aligned}
+    \label{eq:bell-projector-pauli-expansions}
+\end{equation}
+
+These decompositions motivate the definition of the operator subspace
+\begin{equation}
+    \mathcal S_{\mathrm B}
+    \coloneqq
+    \operatorname{span}
+    \{I I, X X, Y Y, Z Z\}.
+    \label{eq:bell-diagonal-subspace}
+\end{equation}
+An operator belongs to $\mathcal S_{\mathrm B}$ if it is a linear
+combination of these four Pauli operators.
+
+A two-qubit density operator $\rho$ is called Bell-diagonal if it
+is diagonal in the Bell basis. By
+Lemma~\ref{lem:bell-pauli-transformation}, this is equivalent to
+$\rho\in\mathcal S_{\mathrm B}$.
+
+For such a state, we define its restricted Pauli--Liouville vector as
+\begin{equation}
+    \plket{\rho}
+    \coloneqq
+    \begin{bmatrix}
+        s_{II}(\rho)  &
+        s_{XX}(\rho)  &
+        s_{Y Y}(\rho) &
+        s_{Z Z}(\rho)
+    \end{bmatrix}^{ T},
+    \label{eq:restricted-pauli-liouville-vector}
+\end{equation}
+where $s_P(\rho)\coloneqq\operatorname{Tr}(P^\dagger\rho)$.
+
+The relation between the Bell basis and the Pauli basis is
+standard~\cite{Horodecki1996,Luo2008}. For completeness of presentation, we state the
+corresponding change-of-basis relation below.
+
+\begin{lemma}
+    \label{lem:bell-pauli-transformation}
+    Consider the following ordered bases of \(\mathcal S_B\):
+    \begin{equation}
+        \begin{aligned}
+            \mathcal B_{\mathrm{Bell}}
+             & \coloneqq
+            \left(
+            \ket{\Phi^+}\!\bra{\Phi^+},
+            \ket{\Psi^+}\!\bra{\Psi^+},
+            \ket{\Psi^-}\!\bra{\Psi^-},
+            \ket{\Phi^-}\!\bra{\Phi^-}
+            \right),     \\
+            \mathcal B_{\mathrm P}
+             & \coloneqq
+            \left(
+            I I,
+            X X,
+            Y Y,
+            Z Z
+            \right).
+        \end{aligned}
+        \label{1}
+    \end{equation}
+    There exists a full-rank transformation matrix $W$ which satisfies $4WW^T= I_4$ such that
+    \begin{equation}
+        \mathcal{B}_{\mathrm{Bell}}
+        =
+        \mathcal{B}_{\mathrm{P}}W,
+        \qquad
+        W=
+        \frac{1}{4}     \begin{bmatrix*}[r]
+         1 &  1 &  1 &  1 \\
+         1 &  1 & -1 & -1 \\
+        -1 &  1 & -1 &  1 \\
+         1 & -1 & -1 &  1
+    \end{bmatrix*}.
+        \label{eq:bell-pauli-transform}
+    \end{equation}
+\end{lemma}
+
+For a normalized state \(\rho\), its fidelity is defined as
+\begin{equation}
+    \begin{aligned}
+        F(\rho)
+         & =\frac{1}{4}\left[
+                           s_{I I}(\rho)
+                           +s_{X X}(\rho)
+                           -s_{Y Y}(\rho)
+                           +s_{Z Z}(\rho)
+                           \right].
+    \end{aligned}
+    \label{eq:bell-state-fidelity}
+\end{equation}
+
+Consider the single-qubit Pauli channel
+\begin{equation}
+    \mathcal P(\sigma)
+    =
+    A\sigma
+    +BX\sigma X
+    +CY\sigma Y
+    +DZ\sigma Z,
+    \label{eq:single-qubit-pauli-channel}
+\end{equation}
+where
+\(
+A, B, C, D\geq 0
+\) and \(
+A+B+C+D=1.
+\)
+If the first qubit is unaffected and the second qubit undergoes
+\(\mathcal P\), the corresponding two-qubit channel is
+\(
+\mathcal E=\mathcal I\otimes\mathcal P,
+\)
+where \(\mathcal I\) denotes the identity channel.
+Applying this channel to the maximally entangled state
+\(\ket{\Phi^+}\) produces the Bell-diagonal state
+\begin{equation}
+    \begin{aligned}
+        \rho
+         & =
+        \mathcal E\left(\ket{\Phi^+}\!\bra{\Phi^+}\right) \\
+         & =
+        A\ket{\Phi^+}\!\bra{\Phi^+}
+                       {+}B\ket{\Psi^+}\!\bra{\Psi^+}
+                                         {+}C\ket{\Psi^-}\!\bra{\Psi^-}
+                                                           {+}D\ket{\Phi^-}\!\bra{\Phi^-}.
+    \end{aligned}
+    \label{eq:pauli-channel-output-state}
+\end{equation}
+
+
+As defined in \eqref{eq:ptm-definition}, the full PTM
+\(R_{\mathcal E}\) is a \(16\times16\) matrix with respect to the
+complete two-qubit Pauli basis. However, $\mathcal S_{\mathrm B}$ is invariant under $\mathcal E$,
+meaning that $\mathcal E(\mathcal{G})\in\mathcal S_{\mathrm B}$ for every
+$\mathcal{G}\in\mathcal S_{\mathrm B}$. Therefore, the action of \(\mathcal E\) on
+Bell-diagonal states is completely described by its restriction to
+\(\mathcal S_B\). With respect to the ordered basis
+\(\mathcal B_{\mathrm P}\) in \ref{1}, the resulting \(4\times4\) PTM is
+\begin{equation}
+    \begin{aligned}
+        \left.R_{\mathcal E}\right|_{\mathcal S_B}
+         & =
+        \operatorname{diag}(1,q_X,q_Y,q_Z), \\
+        q_X
+         & =
+        A+B-C-D
+        =
+        2(A+B)-1,                           \\
+        q_Y
+         & =
+        A-B+C-D
+        =
+        2(A+C)-1,                           \\
+        q_Z
+         & =
+        A-B-C+D
+        =
+        2(A+D)-1.
+    \end{aligned}
+    \label{eq:pauli-channel-ptm}
+\end{equation}
+Here, \(q_X,q_Y,q_Z\) are also the eigenvalues of the single-qubit
+Pauli channel on \(X,Y,Z\), respectively. It is obvious that $q_X,q_Y,q_Z\in [-1,1],
+$
+which leads to the identification challenge in QNT, we will elaborate this later in \S \ref{subsec:direct-nt}.
+
+Consequently, the output state in
+\eqref{eq:pauli-channel-output-state} has the Pauli decomposition
+\begin{equation}
+    \rho
+    =
+    \frac{1}{4}
+    \left(
+    I I
+    +q_X X X
+    -q_Y Y Y
+    +q_Z Z Z
+    \right),
+    \label{eq:pauli-channel-output-expansion}
+\end{equation}
+and its restricted Pauli--Liouville vector is
+\begin{equation}
+    \plket{\rho}
+    =
+    \begin{bmatrix}
+        1 & q_X & -q_Y & q_Z
+    \end{bmatrix}^{T}.
+    \label{eq:pauli-channel-output-vector}
+\end{equation}
+
+
+By Lemma~\ref{lem:bell-pauli-transformation}, the Pauli coefficients
+of state $\rho$ uniquely determine the channel parameters
+\(A,B,C,D\).
+
+
+\subsection{Double-Selection Protocol}
+\label{doub}\label{subsec:doub}
+
+Entanglement distillation aims to  probabilistically
+ transform multiple copies of a noisy
+entangled pairs into  fewer pairs with higher fidelity to a target Bell
+state, which we take to be $\ket{\Phi^+}$.
+For example, the protocol considered here uses two noisy ancillary
+pairs to probabilistically increase the fidelity of a third pair.
+Recent work has shown that measurement statistics collected during
+entanglement distillation can also be used for state
+estimation~\cite{Casapao_2025}.
+
+We consider the double-selection protocol introduced by Fujii and
+Yamamoto~\cite{PhysRevA.80.042308}.
+Figure~\ref{fig:double-selection-circuit} illustrates its dual role:
+successful attempts yield purified entangled pairs, while measurement
+records from all attempts are used to estimate the input
+Bell-diagonal state under the conditions specified below.
+
+
+\begin{figure*}[tb]
+    \centering
+    \resizebox{\textwidth}{!}{%
+        \input{figures/double-selection-overview.tex}%
+    }
+    \caption{
+        Illustration of the double-selection protocol, with an example
+        demonstrating its dual role in entanglement distillation and
+        state estimation.
+        Initially, Alice and Bob share independent copies of a Bell-diagonal
+        state with fidelity $0.80$ with respect to $\ket{\Phi^+}$
+        and equal weights on the other three Bell states.
+        The subsystems $A_i$ and $B_i$ form the $i$th shared entangled pair.
+        In each attempt, three pairs undergo bilateral CNOT operations,
+        after which the second and third pairs are measured in the
+        $Z$ and $X$ bases, respectively.
+        Under ideal local operations and measurements, the first pair is
+        retained when Alice's and Bob's outcomes coincide in both bases,
+        yielding an output state with fidelity approximately $0.89$.
+        Meanwhile, measurement records from all attempts, including
+        unsuccessful ones, are used to estimate the input Bell-diagonal state.
+    }
+    \label{fig:double-selection-circuit}
+\end{figure*}
+
+
+Alice and Bob initially share three independent copies of the
+Bell-diagonal state (called \emph{source state}) in \eqref{eq:pauli-channel-output-expansion} through a noisy quantum channel. Denote the copies by
+\(\rho_1,\rho_2,\rho_3\), with
+\(\rho_1=\rho_2=\rho_3=\rho\).
+
+The protocol proceeds as follows.
+\begin{enumerate}
+    \item Alice and Bob each locally apply a  CNOT gate, using their qubit
+          from $\rho_1$ as the control and their qubit from $\rho_2$ as
+          the target.
+
+    \item They each locally apply  a second local CNOT gate, using their qubit
+          from $\rho_3$ as the control and their qubit from $\rho_2$ as
+          the target.
+    \item They measure \(\rho_2\) in the \(Z\) basis and \(\rho_3\) in
+          the \(X\) basis. Let \(z_A,z_B\) and \(x_A,x_B\) denote the local
+          outcomes of Alice and Bob, respectively.
+
+    \item They retain \(\rho_1\) if and only if
+          \(z_A=z_B\) and \(x_A=x_B\); otherwise, they discard it.
+\end{enumerate}
+
+
+We repeat the double-selection circuit and comparing Alice's and Bob's
+measurement outcomes yields the marginal and joint coincidence
+probabilities
+\begin{equation}
+    \begin{aligned}
+        p_Z
+         & \coloneqq \Pr(z_A=z_B)
+        =\frac{1+q_Z^3}{2},       \\
+        p_X
+         & \coloneqq \Pr(x_A=x_B)
+        =\frac{1+q_X^2}{2},       \\
+        p_{XZ}
+         & \coloneqq
+        \Pr(z_A=z_B,\;x_A=x_B)=\frac{1+q_Z^3+q_X^2+q_Zq_Y^2}{4}.
+    \end{aligned}
+    \label{eq:double-selection-probabilities}
+\end{equation}
+Here, \(p_{XZ}\) is also the \emph{acceptance probability} of the protocol.
+
+The following estimation result follows from the double-selection statistics derived by Casapao et al.~\citep[Sec.~III-A]{Casapao_2025}.
+
+\begin{lemma}[Estimation from double-selection statistics]
+    \label{lem:double-selection-statistics}
+    Let \(\rho\) be the Bell-diagonal state in
+    \eqref{eq:pauli-channel-output-expansion}. If
+    \(F(\rho)>1/2\), then, under ideal local operations and measurements,
+    the coincidence probabilities \(p_X,p_Z,p_{XZ}\) uniquely determine
+    the nontrivial PTM eigenvalues \(q_X,q_Y,q_Z\).
+    Specially, from rearranging~\eqref{eq:double-selection-probabilities}, we have
+    \begin{equation}
+        \begin{aligned}
+            q_Z
+             & =\sqrt[3]{2p_Z-1}, \\
+            q_X
+             & =\sqrt{2p_X-1},    \\
+            q_Y
+             & =
+            \sqrt{
+                \frac{
+                    4p_{XZ}-2p_X-2p_Z+1
+                }{
+                    \sqrt[3]{2p_Z-1}
+                }
+            }.
+        \end{aligned}
+        \label{eq:double-selection-inversion}
+    \end{equation}
+    Together with
+    \eqref{eq:pauli-channel-output-vector} and
+    Lemma~\ref{lem:bell-pauli-transformation}, these quantities uniquely
+    determine the input Bell-diagonal state.
+\end{lemma}
+
+% \begin{proof}
+% The condition \(F(\rho)>1/2\) implies
+% \(q_X,q_Y,q_Z>0\). Therefore, the positive solution of
+% \eqref{eq:double-selection-probabilities} is unique and is given by
+% Hence, \(p_X,p_Z,p_{XZ}\) uniquely determine
+% \(q_X,q_Y,q_Z\). 
+% \end{proof}
+
+
+
+    \begin{observation}
+        \label{lem3}
+        The estimation of parameter $q_Z$ in the double-selection protocol is unique by itself and does not rely on the fidelity condition \(F(\rho)> \frac 1 2\).
+    \end{observation}
+    Later on, we will leverage this observation and another channel dressing technique to remove the requirement of the \(F(\rho)> \frac 1 2\) condition in our protocols.
+
+
+

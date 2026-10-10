@@ -1,0 +1,27 @@
+\section{Conclusion}
+
+In this work, we presented a distillation-assisted framework for quantum
+network tomography that uses the same measurement records to characterize
+internal links and support entanglement distillation. For a three-link
+star network with unknown Pauli channels, we combined \unicast{} and
+\mergecast{} preparations with Clifford dressing to develop two estimators
+that recover link-level channel parameters without additional tomography
+measurements.
+The \jce{} exploits marginal and joint coincidence statistics to improve
+estimation accuracy under a source-state fidelity condition, while the
+\mce{} removes this requirement through uniform Clifford dressing at the
+cost of additional configurations. The two estimators therefore offer
+a trade-off between measurement requirements and applicability.
+
+Qiskit simulations demonstrated that both estimators accurately
+reconstruct link channels while retaining entangled pairs with improved
+fidelity in the tested regime. We further extended the framework to a
+six-link triangular network, demonstrating its applicability beyond
+the basic star topology.
+Future work will extend the framework to account for state preparation
+and measurement (SPAM) errors and explore its application to more general
+network topologies. We also plan to develop distillation protocols that
+improve both tomography accuracy and the fidelity of the retained
+entangled pairs. These results establish distillation-assisted tomography as a promising
+approach to simultaneous channel characterization and high-fidelity
+entanglement distribution.

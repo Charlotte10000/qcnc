@@ -1,0 +1,123 @@
+\documentclass[conference]{IEEEtran}
+\IEEEoverridecommandlockouts
+\usepackage{quantikz}
+% \usepackage{cite}
+\usepackage[square,numbers]{natbib}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{algorithmic}
+\usepackage{graphicx}
+\usepackage{textcomp}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usepackage{braket}
+\usepackage{bm}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\newcommand{\note}[1]{\textcolor{red}{[Note: #1]}}
+\usepackage[colorinlistoftodos,prependcaption,textsize=tiny,textwidth=1cm,color=green]{todonotes}
+\usepackage{subcaption}
+\usepackage{tikz}
+\usetikzlibrary{quantikz2}
+\newsavebox{\DSCircuitBox}
+
+\usepackage{amsthm}
+\usepackage{mathtools}
+ \usepackage{booktabs,threeparttable}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{observation}[theorem]{Observation}
+
+\newtheorem{assumption}[theorem]{Assumption}
+
+
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{hypothesis}[theorem]{Hypothesis}
+\newtheorem{remark}[theorem]{Remark}
+\newcommand{\xw}[1]{\textcolor{violet}{[XW: #1]}}
+\definecolor{mlcolor}{RGB}{0,70,180}
+\newcommand{\ml}[1]{\textcolor{mlcolor}{[ML: #1]}}
+\usepackage{mathtools}
+
+\usetikzlibrary{
+    arrows.meta,
+    backgrounds,
+    calc,
+    decorations.pathmorphing,
+    fit,
+    positioning
+}
+
+\DeclareMathOperator{\Tr}{Tr}
+\DeclareMathOperator{\diag}{diag}
+
+% Bell-correlation subspace and its Pauli--Liouville vector.
+\newcommand{\SB}{\mathsf{S}_{\mathrm B}}
+\newcommand{\plket}[1]{ \left. \left|#1\right\rangle \right \rangle_{\mathrm B}}
+
+\usepackage{xspace}
+\newcommand{\unicast}{{\normalfont \texttt{Unicast}}\xspace}
+\newcommand{\mergecast}{{\normalfont \texttt{Mergecast}}\xspace}
+\newcommand{\jce}{{\normalfont \texttt{JCE}}\xspace}
+\newcommand{\mce}{{\normalfont \texttt{MCE}}\xspace}
+
+\newcommand{\bellpair}[3]{%
+    \draw[
+        blue!70!black,
+        line width=0.8pt,
+        decorate,
+        decoration={
+            snake,
+            amplitude=0.5mm,
+            segment length=2.5mm
+        }
+    ] (#1,#2) -- (#1,#3);
+    \filldraw[fill=white,draw=black,line width=0.8pt]
+        (#1,#2) circle (2.2pt);
+    \filldraw[fill=white,draw=black,line width=0.8pt]
+        (#1,#3) circle (2.2pt);
+}
+
+\def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
+    T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
+
+\title{Freeriding Entanglement Distillation to Achieve Quantum Network Tomography}
+
+% \author{...}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+
+
+
+
+Entanglement distillation and quantum network tomography (QNT) address complementary needs in noisy quantum networks: the former improves the fidelity of distributed entanglement, while the latter identifies which internal links introduce the noise. Both require local measurement, yet they are typically treated as separate tasks. In this paper, we integrate QNT into end-to-end entanglement distillation by reusing the measurement statistics of the double-selection protocol, collected at peripheral monitors, for link-level characterization, so that distillation measurements come ``for free'' with respect to tomography. For a three-link star network with unknown Pauli channels, we combine Unicast and modified Mergecast preparations with Clifford dressing to identify all three Pauli channels. On this basis, we develop two estimators: the Joint-Coincidence Estimator (JCE), which exploits joint $X/Z$ coincidence statistics under a source-state fidelity condition $F > 1/2$, and the Marginal-Coincidence Estimator (MCE), which uses only Z-basis coincidence statistics with uniform Clifford dressing and removes this condition. We prove that both estimators uniquely identify all three Pauli channels without access to measurement outcomes at the central node. Qiskit simulations show that JCE and MCE recover channel parameters accurately while retaining fidelity-improved entangled pairs, and that retaining joint coincidence information improves estimation accuracy. We further extend JCE to a six-link triangular network, demonstrating applicability to more general network topologies beyond the star topology. These results demonstrate how distillation measurements can
+support internal-link characterization without additional
+measurements dedicated to tomography.
+\end{abstract}
+
+\begin{IEEEkeywords}
+Quantum Network Tomography, Entanglement Distillation, Mergecast.
+\end{IEEEkeywords}
+
+\input{sections/introduction}
+
+\input{sections/preliminaries}
+
+\input{sections/problem-formulation}
+
+\input{sections/distillation-assisted-tomography}
+\input{sections/numerical experiment}
+\input{sections/conclusion}
+\appendices
+% \input{sections/appendix}
+\bibliographystyle{IEEEtran}
+\bibliography{ref}
+
+\end{document}

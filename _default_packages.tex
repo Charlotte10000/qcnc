@@ -1,0 +1,203 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%% Author's Macro Begin
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%% for Reference
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{natbib}
+\setcitestyle{authoryear,open={(},close={)}} %Citation-related commands
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%% for Figure and Table
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{graphicx}
+% \usepackage{subfig}
+\usepackage{diagbox}
+\usepackage{multirow}
+\usepackage{booktabs}
+\usepackage{subcaption}
+\usepackage{threeparttable, array, float}
+\usepackage{colortbl}
+\usepackage{tkz-graph}
+\usepackage{tikz}
+\usepackage{pgfplots}
+% \usetikzlibrary{calc}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%% for Font
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{textcomp}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%% for Color
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{xcolor}
+
+\usepackage{hyperref}
+% \hypersetup{
+%     colorlinks   = true, %Colours links instead of ugly boxes
+%     urlcolor     = blue, %Colour for external hyperlinks
+%     linkcolor    = blue, %Colour of internal links
+%     citecolor   = blue %Colour of citations
+% }
+\definecolor{mydarkblue}{rgb}{0,0.08,0.45}
+\hypersetup{ %
+    pdftitle={},
+    pdfsubject={},
+    pdfkeywords={},
+    pdfborder=0 0 0,
+    pdfpagemode=UseNone,
+    colorlinks=true,
+    linkcolor=mydarkblue,
+    citecolor=mydarkblue,
+    filecolor=mydarkblue,
+    urlcolor=mydarkblue,
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%% for Notations
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{amsmath,amsfonts,amssymb}
+\usepackage{bm, bbm}
+\usepackage{mathtools}
+\usepackage{nicefrac}
+\usepackage{physics}
+
+\mathtoolsset{showonlyrefs,showmanualtags}
+
+
+\makeatletter
+\newcommand\addstarred[1]{%
+    \expandafter\let\csname\string#1@nostar\endcsname#1%
+    \edef#1{\noexpand\@ifstar\expandafter\noexpand\csname\string#1@star\endcsname\expandafter\noexpand\csname\string#1@nostar\endcsname}%
+    \expandafter\newcommand\csname\string#1@star\endcsname%
+}
+\makeatother
+\newcommand{\1}[1]{\mathbbm{1}{\{#1\}}}
+\addstarred\1[1]{\mathbbm{1}{\left\{#1\right\}}}
+
+\DeclarePairedDelimiter\round{\lceil}{\rfloor}
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+% \DeclarePairedDelimiter\abs{\lvert}{\rvert}
+% \DeclarePairedDelimiter\norm{\lVert}{\rVert}
+
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
+
+\renewcommand{\ge}{\geqslant}
+\renewcommand{\le}{\leqslant}
+\renewcommand{\geq}{\geqslant}
+\renewcommand{\leq}{\leqslant}
+\renewcommand{\P}{\mathbb{P}}
+
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\E}{\mathbb{E}}
+
+\newcommand{\mK}{\mathcal{K}}
+\newcommand{\mM}{\mathcal{M}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%% for Notations in this paper
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\upbra}[1]{^{(#1)}}
+\newcommand{\upto}[2]{^{(#1\to#2)}}
+\newcommand{\type}[1]{Type-\uppercase\expandafter{\romannumeral#1}}
+\newcommand{\ci}{\texttt{CR}\xspace}
+\newcommand{\ei}{\texttt{ECR}\xspace}
+
+\newcommand{\ct}{C(T)}
+\newcommand{\rt}{R(T)}
+
+\DeclareMathOperator*{\KL}{{\normalfont KL}}
+\DeclareMathOperator*{\kl}{{\normalfont kl}}
+\DeclareMathOperator*{\ERT}{\mathbb{E}[\normalfont \text{R}_T]}
+\DeclareMathOperator*{\RT}{\text{\normalfont R}_T}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%% for Theorems
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{amsthm}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{remark}[theorem]{Remark}
+
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{assumption}[theorem]{Assumption}
+
+\newtheorem{example}[theorem]{Example}
+\newtheorem{problem}[theorem]{Problem}
+\newtheorem*{observation}{Observation}
+
+% \theoremstyle{remark}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%% for Algorithm
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{algorithm}
+\usepackage[noend]{algpseudocode}
+
+
+\let\oldComment=\Comment
+\renewcommand{\Comment}[1]{\oldComment{\texttt{#1}}}
+\algnewcommand{\LeftComment}[1]{\Statex $\triangleright$ \texttt{#1}}
+\algnewcommand{\RightComment}[1]{\Statex \leavevmode\hfill$\triangleright$ \texttt{#1}}
+
+\algnewcommand\algorithmicinput{\textbf{Input:}}
+\algnewcommand\Input{\item[\algorithmicinput]}%
+
+\algnewcommand\algorithmicoutput{\textbf{Output:}}
+\algnewcommand\Output{\item[\algorithmicoutput]}%
+
+\algnewcommand\algorithmicinitial{\textbf{initialize:}}
+\algnewcommand\Initial{\item[\algorithmicinitial]}%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%% for Writing and Comments
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{xspace}
+\usepackage{comment}
+
+\newcommand{\doe}{\texttt{AAC}\xspace}
+
+
+\usepackage{fontawesome5}
+
+\renewcommand{\check}{{\textcolor{green}{\faCheck}\xspace}}
+\newcommand{\question}{{\textcolor{blue!50!red}{\faQuestion}\xspace}}
+\newcommand{\xtimes}{{\textcolor{blue}{\faTimes}\xspace}}
+\newcommand{\tdmark}{{\textcolor{blue}{\faCircle[regular]}\xspace}}
+\newcommand{\focus}{{\textcolor{red}{\faFire*}\xspace}}
+\newcommand{\sun}{{\textcolor{red}{\faSun}\xspace}}
+
+
+% \setlength {\marginparwidth }{1cm}
+\setlength {\marginparwidth }{2cm}
+\usepackage[colorinlistoftodos,prependcaption,textsize=tiny,textwidth=1cm,color=green]{todonotes}
+% \reversemarginpar
+
+\newcommand{\mo}[1]{{\textcolor{blue}{MH says: #1}}}
+\newcommand{\rev}[1]{{\textcolor{red}{#1}}}
+\newcommand{\xw}[1]{{\textcolor{brown}{XW: #1}}}
+
+\newcommand{\lin}[1]{{\textcolor{purple}{Lin: #1}}}
+
+\newcommand{\revise}[1]{\textcolor{violet}{#1}}
+\newcommand{\review}[1]{\textbf{Question:} \emph{#1}}
+\newcommand{\answer}[1]{\newline\textbf{Answer:} \textcolor{blue}{#1}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%% Author's Macro End
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
